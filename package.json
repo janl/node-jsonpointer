@@ -1,0 +1,14 @@
+{ "name" : "jsonpointer"
+, "description" : "Simple JSON Addressing."
+, "tags" : ["util", "simple", "util", "utility"]
+, "version" : "1.0.0"
+, "author" : "Jan Lehnardt <jan@apache.org>"
+, "repository" :
+  { "type" : "git"
+  , "url" : "http://github.com/janl/node-jsonpointer.git"
+  }
+, "bugs" :
+  { "web" : "http://github.com/janl/node-jsonpointer/issues" }
+, "engines" : ["node >= 0.4.9"]
+, "main" : "./jsonpointer"
+}

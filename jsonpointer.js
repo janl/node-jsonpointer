@@ -1,0 +1,50 @@
+var console = require("console");
+
+var traverse = function(obj, pointer, value) {
+  // assert(isArray(pointer))
+  var part = pointer.shift();
+  if(typeof obj[part] !== "undefined") {
+    if(pointer.length == 0) { // we're done
+      if(typeof value !== "undefined") { // set new value, return old value
+        var old_value = obj[part];
+        if(value === null) {
+          delete obj[part];
+        } else {
+          obj[part] = value;
+        }
+        return old_value;
+      } else { // just reading
+        return obj[part];
+      }
+    } else { // keep traversin!
+      return traverse(obj[part], pointer);
+    }
+  } else {
+    throw("Value for pointer '" + pointer + "' not found.");
+  }
+}
+
+var validate_input = function(obj, pointer) {
+  if(typeof obj !== "object") {
+    throw("Invalid input object.");
+  }
+
+  if(!pointer) {
+    throw("Invalid JSON pointer.");
+  }
+}
+
+var get = function(obj, pointer) {
+  validate_input(obj, pointer);
+  pointer = pointer.split("/").slice(1);
+  return traverse(obj, pointer);
+}
+
+var set = function(obj, pointer, value) {
+  validate_input(obj, pointer);
+  pointer = pointer.split("/").slice(1);
+  return traverse(obj, pointer);
+}
+
+exports.get = get
+exports.set = set
