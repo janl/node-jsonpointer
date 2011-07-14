@@ -17,7 +17,7 @@ var traverse = function(obj, pointer, value) {
         return obj[part];
       }
     } else { // keep traversin!
-      return traverse(obj[part], pointer);
+      return traverse(obj[part], pointer, value);
     }
   } else {
     throw("Value for pointer '" + pointer + "' not found.");
@@ -43,7 +43,7 @@ var get = function(obj, pointer) {
 var set = function(obj, pointer, value) {
   validate_input(obj, pointer);
   pointer = pointer.split("/").slice(1);
-  return traverse(obj, pointer);
+  return traverse(obj, pointer, value);
 }
 
 exports.get = get
