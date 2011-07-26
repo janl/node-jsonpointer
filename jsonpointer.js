@@ -36,14 +36,22 @@ var validate_input = function(obj, pointer) {
 
 var get = function(obj, pointer) {
   validate_input(obj, pointer);
-  pointer = pointer.split("/").slice(1);
-  return traverse(obj, pointer);
+  if (pointer === "/") {
+    return obj;
+  } else {
+    pointer = pointer.split("/").slice(1);
+    return traverse(obj, pointer);
+  }
 }
 
 var set = function(obj, pointer, value) {
   validate_input(obj, pointer);
-  pointer = pointer.split("/").slice(1);
-  return traverse(obj, pointer, value);
+  if (pointer === "/") {
+    throw("Cannot modify the value of a parameter.");
+  } else {
+    pointer = pointer.split("/").slice(1);
+    return traverse(obj, pointer, value);
+  }
 }
 
 exports.get = get
