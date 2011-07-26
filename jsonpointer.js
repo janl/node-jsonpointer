@@ -47,7 +47,7 @@ var get = function(obj, pointer) {
 var set = function(obj, pointer, value) {
   validate_input(obj, pointer);
   if (pointer === "/") {
-    throw("Cannot modify the value of a parameter.");
+    return obj;
   } else {
     pointer = pointer.split("/").slice(1);
     return traverse(obj, pointer, value);
