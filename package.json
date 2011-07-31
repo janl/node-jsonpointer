@@ -1,7 +1,7 @@
 { "name" : "jsonpointer"
 , "description" : "Simple JSON Addressing."
 , "tags" : ["util", "simple", "util", "utility"]
-, "version" : "1.0.0"
+, "version" : "1.0.1"
 , "author" : "Jan Lehnardt <jan@apache.org>"
 , "repository" :
   { "type" : "git"
