@@ -31,6 +31,8 @@ assert.equal(jsonpointer.get(obj, "/d/e/0/a"), 4);
 assert.equal(jsonpointer.get(obj, "/d/e/1/b"), 5);
 assert.equal(jsonpointer.get(obj, "/d/e/2/c"), 6);
 
+assert.equal(jsonpointer.get(obj, "/"), obj);
+
 var complexKeys = {
   "a/b": {
     c: 1
