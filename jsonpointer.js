@@ -2,7 +2,7 @@ var console = require("console");
 
 var traverse = function(obj, pointer, value) {
   // assert(isArray(pointer))
-  var part = pointer.shift();
+  var part = unescape(pointer.shift());
   if(typeof obj[part] !== "undefined") {
     if(pointer.length == 0) { // we're done
       if(typeof value !== "undefined") { // set new value, return old value

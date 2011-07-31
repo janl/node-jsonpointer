@@ -31,4 +31,19 @@ assert.equal(jsonpointer.get(obj, "/d/e/0/a"), 4);
 assert.equal(jsonpointer.get(obj, "/d/e/1/b"), 5);
 assert.equal(jsonpointer.get(obj, "/d/e/2/c"), 6);
 
+var complexKeys = {
+  "a/b": {
+    c: 1
+  },
+  d: {
+    "e/f": 2
+  }
+}
+
+assert.equal(jsonpointer.get(complexKeys, "/a%2Fb/c"), 1);
+assert.equal(jsonpointer.get(complexKeys, "/d/e%2Ff"), 2);
+assert.throws(function() {
+  assert.equal(jsonpointer.get(complexKeys, "/a/b/c"), 1);
+});
+
 console.log("All tests pass.");
