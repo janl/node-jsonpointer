@@ -7,20 +7,20 @@ var traverse = function(obj, pointer, value) {
     throw("Value for pointer '" + pointer + "' not found.");
     return;
   }
-  if(pointer.length == 0) { // we're done
-    if(typeof value !== "undefined") { // set new value, return old value
-      var old_value = obj[part];
-      if(value === null) {
-        delete obj[part];
-      } else {
-        obj[part] = value;
-      }
-      return old_value;
-    } else { // just reading
-      return obj[part];
-    }
-  } else { // keep traversin!
+  if(pointer.length != 0) { // keep traversin!
     return traverse(obj[part], pointer, value);
+  }
+  // we're done
+  if(typeof value !== "undefined") { // set new value, return old value
+    var old_value = obj[part];
+    if(value === null) {
+      delete obj[part];
+    } else {
+      obj[part] = value;
+    }
+    return old_value;
+  } else { // just reading
+    return obj[part];
   }
 }
 
