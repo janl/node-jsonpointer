@@ -3,24 +3,24 @@ var console = require("console");
 var traverse = function(obj, pointer, value) {
   // assert(isArray(pointer))
   var part = unescape(pointer.shift());
-  if(typeof obj[part] !== "undefined") {
-    if(pointer.length == 0) { // we're done
-      if(typeof value !== "undefined") { // set new value, return old value
-        var old_value = obj[part];
-        if(value === null) {
-          delete obj[part];
-        } else {
-          obj[part] = value;
-        }
-        return old_value;
-      } else { // just reading
-        return obj[part];
-      }
-    } else { // keep traversin!
-      return traverse(obj[part], pointer, value);
-    }
-  } else {
+  if(typeof obj[part] === "undefined") {
     throw("Value for pointer '" + pointer + "' not found.");
+    return;
+  }
+  if(pointer.length == 0) { // we're done
+    if(typeof value !== "undefined") { // set new value, return old value
+      var old_value = obj[part];
+      if(value === null) {
+        delete obj[part];
+      } else {
+        obj[part] = value;
+      }
+      return old_value;
+    } else { // just reading
+      return obj[part];
+    }
+  } else { // keep traversin!
+    return traverse(obj[part], pointer, value);
   }
 }
 
