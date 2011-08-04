@@ -11,17 +11,18 @@ var traverse = function(obj, pointer, value) {
     return traverse(obj[part], pointer, value);
   }
   // we're done
-  if(typeof value !== "undefined") { // set new value, return old value
-    var old_value = obj[part];
-    if(value === null) {
-      delete obj[part];
-    } else {
-      obj[part] = value;
-    }
-    return old_value;
-  } else { // just reading
+  if(typeof value === "undefined") {
+    // just reading
     return obj[part];
   }
+  // set new value, return old value
+  var old_value = obj[part];
+  if(value === null) {
+    delete obj[part];
+  } else {
+    obj[part] = value;
+  }
+  return old_value;
 }
 
 var validate_input = function(obj, pointer) {
