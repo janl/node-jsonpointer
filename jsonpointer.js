@@ -3,25 +3,26 @@ var console = require("console");
 var traverse = function(obj, pointer, value) {
   // assert(isArray(pointer))
   var part = unescape(pointer.shift());
-  if(typeof obj[part] !== "undefined") {
-    if(pointer.length == 0) { // we're done
-      if(typeof value !== "undefined") { // set new value, return old value
-        var old_value = obj[part];
-        if(value === null) {
-          delete obj[part];
-        } else {
-          obj[part] = value;
-        }
-        return old_value;
-      } else { // just reading
-        return obj[part];
-      }
-    } else { // keep traversin!
-      return traverse(obj[part], pointer, value);
-    }
-  } else {
+  if(typeof obj[part] === "undefined") {
     throw("Value for pointer '" + pointer + "' not found.");
+    return;
   }
+  if(pointer.length != 0) { // keep traversin!
+    return traverse(obj[part], pointer, value);
+  }
+  // we're done
+  if(typeof value === "undefined") {
+    // just reading
+    return obj[part];
+  }
+  // set new value, return old value
+  var old_value = obj[part];
+  if(value === null) {
+    delete obj[part];
+  } else {
+    obj[part] = value;
+  }
+  return old_value;
 }
 
 var validate_input = function(obj, pointer) {
@@ -38,20 +39,18 @@ var get = function(obj, pointer) {
   validate_input(obj, pointer);
   if (pointer === "/") {
     return obj;
-  } else {
-    pointer = pointer.split("/").slice(1);
-    return traverse(obj, pointer);
   }
+  pointer = pointer.split("/").slice(1);
+  return traverse(obj, pointer);
 }
 
 var set = function(obj, pointer, value) {
   validate_input(obj, pointer);
   if (pointer === "/") {
     return obj;
-  } else {
-    pointer = pointer.split("/").slice(1);
-    return traverse(obj, pointer, value);
   }
+  pointer = pointer.split("/").slice(1);
+  return traverse(obj, pointer, value);
 }
 
 exports.get = get
