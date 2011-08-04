@@ -39,10 +39,9 @@ var get = function(obj, pointer) {
   validate_input(obj, pointer);
   if (pointer === "/") {
     return obj;
-  } else {
-    pointer = pointer.split("/").slice(1);
-    return traverse(obj, pointer);
   }
+  pointer = pointer.split("/").slice(1);
+  return traverse(obj, pointer);
 }
 
 var set = function(obj, pointer, value) {
