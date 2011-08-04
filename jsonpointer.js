@@ -48,10 +48,9 @@ var set = function(obj, pointer, value) {
   validate_input(obj, pointer);
   if (pointer === "/") {
     return obj;
-  } else {
-    pointer = pointer.split("/").slice(1);
-    return traverse(obj, pointer, value);
   }
+  pointer = pointer.split("/").slice(1);
+  return traverse(obj, pointer, value);
 }
 
 exports.get = get
