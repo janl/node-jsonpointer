@@ -8,7 +8,7 @@
   , "url" : "http://github.com/janl/node-jsonpointer.git"
   }
 , "bugs" :
-  { "web" : "http://github.com/janl/node-jsonpointer/issues" }
+  { "url" : "http://github.com/janl/node-jsonpointer/issues" }
 , "engines" : ["node >= 0.4.9"]
 , "main" : "./jsonpointer"
 , "scripts" : { "test" : "node test.js" }
