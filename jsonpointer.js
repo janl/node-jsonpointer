@@ -15,9 +15,8 @@ var untilde = function(str) {
 var traverse = function(obj, pointer, value) {
   // assert(isArray(pointer))
   var part = untilde(pointer.shift());
-  if(typeof obj[part] === "undefined") {
-    throw("Value for pointer '" + pointer + "' not found.");
-    return;
+  if(!obj.hasOwnProperty(part)) {
+    return null;
   }
   if(pointer.length !== 0) { // keep traversin!
     return traverse(obj[part], pointer, value);
