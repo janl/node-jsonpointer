@@ -20,8 +20,6 @@ This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-iet
     All tests pass.
     $
 
-## Travis CI Status:
-
 [![Build Status](https://travis-ci.org/janl/node-jsonpointer.png?branch=master)](undefined)
 
 ## Author
