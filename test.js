@@ -33,7 +33,10 @@ assert.equal(jsonpointer.get(obj, "/d/e/2/c"), 6);
 
 assert.equal(jsonpointer.get(obj, ""), obj);
 assert.throws(function() {
-  assert.equal(jsonpointer.get(obj, "a"), 3);
+  jsonpointer.get(obj, "a");
+});
+assert.throws(function() {
+  jsonpointer.get(obj, "a/");
 });
 
 var complexKeys = {
@@ -51,19 +54,13 @@ assert.equal(jsonpointer.get(complexKeys, "/a~1b/c"), 1);
 assert.equal(jsonpointer.get(complexKeys, "/d/e~1f"), 2);
 assert.equal(jsonpointer.get(complexKeys, "/~01"), 3);
 assert.equal(jsonpointer.get(complexKeys, "/01"), 4);
-assert.throws(function() {
-  assert.equal(jsonpointer.get(complexKeys, "/a/b/c"), 1);
-});
-assert.throws(function() {
-  assert.equal(jsonpointer.get(complexKeys, "/~1"), 3);
-});
+assert.equal(jsonpointer.get(complexKeys, "/a/b/c"), null);
+assert.equal(jsonpointer.get(complexKeys, "/~1"), null);
 
 // draft-ietf-appsawg-json-pointer-08 has special array rules
 var ary = [ "zero", "one", "two" ];
+assert.equal(jsonpointer.get(ary, "/01"), null);
 
-assert.throws(function() {
-  assert.equal(jsonpointer.get(ary, "/01"), "one");
-});
 //assert.equal(jsonpointer.set(ary, "/-", "three"), null);
 //assert.equal(ary[3], "three");
 
