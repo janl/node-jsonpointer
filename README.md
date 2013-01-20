@@ -1,6 +1,6 @@
 # JSON Pointer for nodejs
 
-This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-00).
+This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08).
 
 ## Usage
 
