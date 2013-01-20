@@ -1,13 +1,25 @@
 var console = require("console");
 
+var untilde = function(str) {
+  return str.replace(/~./g, function(m) {
+    switch (m) {
+      case "~0":
+        return "~";
+      case "~1":
+        return "/";
+    }
+    throw("Invalid tilde escape: " + m);
+  });
+}
+
 var traverse = function(obj, pointer, value) {
   // assert(isArray(pointer))
-  var part = unescape(pointer.shift());
+  var part = untilde(pointer.shift());
   if(typeof obj[part] === "undefined") {
     throw("Value for pointer '" + pointer + "' not found.");
     return;
   }
-  if(pointer.length != 0) { // keep traversin!
+  if(pointer.length !== 0) { // keep traversin!
     return traverse(obj[part], pointer, value);
   }
   // we're done
@@ -30,26 +42,36 @@ var validate_input = function(obj, pointer) {
     throw("Invalid input object.");
   }
 
+  if(pointer === "") {
+    return [];
+  }
+
   if(!pointer) {
     throw("Invalid JSON pointer.");
   }
+
+  pointer = pointer.split("/");
+  var first = pointer.shift();
+  if (first !== "") {
+    throw("Invalid JSON pointer.");
+  }
+
+  return pointer;
 }
 
 var get = function(obj, pointer) {
-  validate_input(obj, pointer);
-  if (pointer === "/") {
+  pointer = validate_input(obj, pointer);
+  if (pointer.length === 0) {
     return obj;
   }
-  pointer = pointer.split("/").slice(1);
   return traverse(obj, pointer);
 }
 
 var set = function(obj, pointer, value) {
-  validate_input(obj, pointer);
-  if (pointer === "/") {
-    return obj;
+  pointer = validate_input(obj, pointer);
+  if (pointer.length === 0) {
+    throw("Invalid JSON pointer for set.")
   }
-  pointer = pointer.split("/").slice(1);
   return traverse(obj, pointer, value);
 }
 
