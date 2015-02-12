@@ -8,7 +8,7 @@ var untilde = function(str) {
       case "~1":
         return "/";
     }
-    throw("Invalid tilde escape: " + m);
+    throw new Error("Invalid tilde escape: " + m);
   });
 }
 
@@ -38,7 +38,7 @@ var traverse = function(obj, pointer, value) {
 
 var validate_input = function(obj, pointer) {
   if(typeof obj !== "object") {
-    throw("Invalid input object.");
+    throw new Error("Invalid input object.");
   }
 
   if(pointer === "") {
@@ -46,13 +46,13 @@ var validate_input = function(obj, pointer) {
   }
 
   if(!pointer) {
-    throw("Invalid JSON pointer.");
+    throw new Error("Invalid JSON pointer.");
   }
 
   pointer = pointer.split("/");
   var first = pointer.shift();
   if (first !== "") {
-    throw("Invalid JSON pointer.");
+    throw new Error("Invalid JSON pointer.");
   }
 
   return pointer;
@@ -69,7 +69,7 @@ var get = function(obj, pointer) {
 var set = function(obj, pointer, value) {
   pointer = validate_input(obj, pointer);
   if (pointer.length === 0) {
-    throw("Invalid JSON pointer for set.")
+    throw new Error("Invalid JSON pointer for set.")
   }
   return traverse(obj, pointer, value);
 }
