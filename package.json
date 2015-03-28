@@ -14,5 +14,5 @@
 , "engines" : ["node >= 0.4.9"]
 , "main" : "./jsonpointer"
 , "scripts" : { "test" : "node test.js" }
-, "licene": "MIT"
+, "license": "MIT"
 }
