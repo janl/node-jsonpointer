@@ -1,5 +1,3 @@
-var console = require("console");
-
 var untilde = function(str) {
   return str.replace(/~./g, function(m) {
     switch (m) {
