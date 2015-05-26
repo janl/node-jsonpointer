@@ -1,5 +1,4 @@
 var assert = require("assert");
-var console = require("console");
 var jsonpointer = require("./jsonpointer");
 
 var obj = {
@@ -32,12 +31,14 @@ assert.equal(jsonpointer.get(obj, "/d/e/1/b"), 5);
 assert.equal(jsonpointer.get(obj, "/d/e/2/c"), 6);
 
 assert.equal(jsonpointer.get(obj, ""), obj);
-assert.throws(function() {
-  jsonpointer.get(obj, "a");
-});
-assert.throws(function() {
-  jsonpointer.get(obj, "a/");
-});
+assert.throws(function(){ jsonpointer.get(obj, "a"); }, validateError);
+assert.throws(function(){ jsonpointer.get(obj, "a/"); }, validateError);
+
+function validateError(err) {
+  if ( (err instanceof Error) && /Invalid JSON pointer/.test(err.message) ) {
+      return true;
+  }
+}
 
 var complexKeys = {
   "a/b": {
