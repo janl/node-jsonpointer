@@ -1,5 +1,5 @@
-var assert = require("assert");
-var jsonpointer = require("./jsonpointer");
+var assert = require('assert');
+var jsonpointer = require('./jsonpointer');
 
 var obj = {
   a: 1,
@@ -23,6 +23,16 @@ assert.equal(jsonpointer.set(obj, "/b/c", 3), 2);
 assert.equal(jsonpointer.set(obj, "/d/e/0/a", 4), 3);
 assert.equal(jsonpointer.set(obj, "/d/e/1/b", 5), 4);
 assert.equal(jsonpointer.set(obj, "/d/e/2/c", 6), 5);
+
+// set nested properties
+assert.equal(jsonpointer.set(obj, "/f/g/h/i", 6), undefined);
+assert.equal(jsonpointer.get(obj, "/f/g/h/i"), 6);
+
+// set an array
+assert.equal(jsonpointer.set(obj, "/f/g/h/foo/-", 'test'), undefined);
+arr = jsonpointer.get(obj, "/f/g/h/foo")
+assert(Array.isArray(arr), 'set /- creates an array.');
+assert.equal(arr[0], 'test');
 
 assert.equal(jsonpointer.get(obj, "/a"), 2);
 assert.equal(jsonpointer.get(obj, "/b/c"), 3);
@@ -62,8 +72,8 @@ assert.equal(jsonpointer.get(complexKeys, "/~1"), null);
 var ary = [ "zero", "one", "two" ];
 assert.equal(jsonpointer.get(ary, "/01"), null);
 
-//assert.equal(jsonpointer.set(ary, "/-", "three"), null);
-//assert.equal(ary[3], "three");
+assert.equal(jsonpointer.set(ary, "/-", "three"), null);
+assert.equal(ary[3], "three");
 
 // Examples from the draft:
 var example = {
