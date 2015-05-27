@@ -65,6 +65,11 @@ var compilePointer = function (pointer) {
   if (!(pointer instanceof Array)) {
     pointer = pointer.split('/')
     if (pointer.shift() !== '') throw new Error('Invalid JSON pointer.')
+  } else {
+    // Clone the pointer array
+    var newPointer = []
+    for (var i = 0; i < pointer.length; i++) newPointer[i] = pointer[i]
+    pointer = newPointer
   }
 
   return pointer
@@ -94,5 +99,18 @@ var set = function (obj, pointer, value) {
   return traverse(obj, pointer, value)
 }
 
+var compile = function (pointer) {
+  var compiled = compilePointer(pointer)
+  return {
+    get: function (object) {
+      return get(object, compiled)
+    },
+    set: function (object, value) {
+      return set(object, compiled, value)
+    }
+  }
+}
+
 exports.get = get
 exports.set = set
+exports.compile = compile
