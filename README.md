@@ -25,7 +25,7 @@ This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-iet
 
 ## Author
 
-(c) 2011 Jan Lehnardt <jan@apache.org>
+(c) 2011-2015 Jan Lehnardt <jan@apache.org> & Marc Bachmann <https://github.com/marcbachmann>
 
 ## License
 
