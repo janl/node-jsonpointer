@@ -17,7 +17,7 @@ jsonpointer.get(obj, '/quo');     // returns null
 jsonpointer.set(obj, '/foo', 6);  // sets obj.foo = 6;
 jsonpointer.set(obj, '/qux/-', 6) // sets obj.qux = [3, 4, 5, 6]
 
-pointer = jsonpointer.compile('/foo')
+var pointer = jsonpointer.compile('/foo')
 pointer.get(obj)    // returns 1
 pointer.set(obj, 1) // sets obj.foo = 1
 ```
