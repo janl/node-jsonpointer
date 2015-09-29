@@ -11,34 +11,51 @@ var untilde = function(str) {
 }
 
 var traverse = function(obj, pointer, value) {
-  // assert(isArray(pointer))
   var part = untilde(pointer.shift());
-  if(!obj.hasOwnProperty(part)) {
-    return null;
+  var isJustReading = arguments.length === 2;
+
+  if (obj[part] == null) {
+    if (isJustReading) return null;
+
+    // support setting of /-
+    if (part === '-' && obj instanceof Array) {
+      part = obj.length;
+    }
+
+    // support nested objects/array when setting values
+    var nextPart = pointer[0];
+    if (nextPart === '-' || !isNaN(nextPart)) {
+      obj[part] = [];
+    } else if (nextPart) {
+      obj[part] = {};
+    }
   }
-  if(pointer.length !== 0) { // keep traversin!
-    return traverse(obj[part], pointer, value);
+
+  // keep traversing
+  if (pointer.length !== 0) {
+    if (isJustReading) {
+      return traverse(obj[part], pointer);
+    } else {
+      return traverse(obj[part], pointer, value);
+    }
   }
+
   // we're done
-  if(typeof value === "undefined") {
-    // just reading
+  if (isJustReading) {
     return obj[part];
   }
+
   // set new value, return old value
-  var old_value = obj[part];
-  if(value === null) {
+  var oldValue = obj[part];
+  if (value === null) {
     delete obj[part];
   } else {
     obj[part] = value;
   }
-  return old_value;
+  return oldValue;
 }
 
-var validate_input = function(obj, pointer) {
-  if(typeof obj !== "object") {
-    throw new Error("Invalid input object.");
-  }
-
+var compilePointer = function(pointer) {
   if(pointer === "") {
     return [];
   }
@@ -47,13 +64,20 @@ var validate_input = function(obj, pointer) {
     throw new Error("Invalid JSON pointer.");
   }
 
-  pointer = pointer.split("/");
-  var first = pointer.shift();
-  if (first !== "") {
-    throw new Error("Invalid JSON pointer.");
+  if (!(pointer instanceof Array)) {
+    pointer = pointer.split("/");
+    if (pointer.shift() !== "") throw new Error("Invalid JSON pointer.")
   }
 
   return pointer;
+}
+
+var validate_input = function(obj, pointer) {
+  if(typeof obj !== "object") {
+    throw new Error("Invalid input object.");
+  }
+
+  return compilePointer(pointer);
 }
 
 var get = function(obj, pointer) {
