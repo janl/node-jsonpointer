@@ -105,4 +105,12 @@ assert.equal(jsonpointer.get(example, '/k\'l'), 6)
 assert.equal(jsonpointer.get(example, '/ '), 7)
 assert.equal(jsonpointer.get(example, '/m~0n'), 8)
 
+// jsonpointer.compile(path)
+var a = {foo: 'bar'}
+var pointer = jsonpointer.compile('/foo')
+assert.equal(pointer.get(a), 'bar')
+assert.equal(pointer.set(a, 'test'), 'bar')
+assert.equal(pointer.get(a), 'test')
+assert.deepEqual(a, {foo: 'test'})
+
 console.log('All tests pass.')
