@@ -24,7 +24,10 @@
   },
   "main": "./jsonpointer",
   "scripts": {
-    "test": "node test.js"
+    "test": "standard && node test.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^5.3.1"
+  }
 }
