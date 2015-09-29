@@ -1,99 +1,97 @@
-var untilde = function(str) {
-  return str.replace(/~./g, function(m) {
+var untilde = function (str) {
+  return str.replace(/~./g, function (m) {
     switch (m) {
-      case "~0":
-        return "~";
-      case "~1":
-        return "/";
+      case '~0': return '~'
+      case '~1': return '/'
     }
-    throw new Error("Invalid tilde escape: " + m);
-  });
+    throw new Error('Invalid tilde escape: ' + m)
+  })
 }
 
-var traverse = function(obj, pointer, value) {
-  var part = untilde(pointer.shift());
-  var isJustReading = arguments.length === 2;
+var traverse = function (obj, pointer, value) {
+  var part = untilde(pointer.shift())
+  var isJustReading = arguments.length === 2
 
   if (obj[part] == null) {
-    if (isJustReading) return null;
+    if (isJustReading) return null
 
     // support setting of /-
     if (part === '-' && obj instanceof Array) {
-      part = obj.length;
+      part = obj.length
     }
 
     // support nested objects/array when setting values
-    var nextPart = pointer[0];
+    var nextPart = pointer[0]
     if (nextPart === '-' || !isNaN(nextPart)) {
-      obj[part] = [];
+      obj[part] = []
     } else if (nextPart) {
-      obj[part] = {};
+      obj[part] = {}
     }
   }
 
   // keep traversing
   if (pointer.length !== 0) {
     if (isJustReading) {
-      return traverse(obj[part], pointer);
+      return traverse(obj[part], pointer)
     } else {
-      return traverse(obj[part], pointer, value);
+      return traverse(obj[part], pointer, value)
     }
   }
 
   // we're done
   if (isJustReading) {
-    return obj[part];
+    return obj[part]
   }
 
   // set new value, return old value
-  var oldValue = obj[part];
+  var oldValue = obj[part]
   if (value === null) {
-    delete obj[part];
+    delete obj[part]
   } else {
-    obj[part] = value;
+    obj[part] = value
   }
-  return oldValue;
+  return oldValue
 }
 
-var compilePointer = function(pointer) {
-  if(pointer === "") {
-    return [];
+var compilePointer = function (pointer) {
+  if (pointer === '') {
+    return []
   }
 
-  if(!pointer) {
-    throw new Error("Invalid JSON pointer.");
+  if (!pointer) {
+    throw new Error('Invalid JSON pointer.')
   }
 
   if (!(pointer instanceof Array)) {
-    pointer = pointer.split("/");
-    if (pointer.shift() !== "") throw new Error("Invalid JSON pointer.")
+    pointer = pointer.split('/')
+    if (pointer.shift() !== '') throw new Error('Invalid JSON pointer.')
   }
 
-  return pointer;
+  return pointer
 }
 
-var validate_input = function(obj, pointer) {
-  if(typeof obj !== "object") {
-    throw new Error("Invalid input object.");
+var validateInput = function (obj, pointer) {
+  if (typeof obj !== 'object') {
+    throw new Error('Invalid input object.')
   }
 
-  return compilePointer(pointer);
+  return compilePointer(pointer)
 }
 
-var get = function(obj, pointer) {
-  pointer = validate_input(obj, pointer);
+var get = function (obj, pointer) {
+  pointer = validateInput(obj, pointer)
   if (pointer.length === 0) {
-    return obj;
+    return obj
   }
-  return traverse(obj, pointer);
+  return traverse(obj, pointer)
 }
 
-var set = function(obj, pointer, value) {
-  pointer = validate_input(obj, pointer);
+var set = function (obj, pointer, value) {
+  pointer = validateInput(obj, pointer)
   if (pointer.length === 0) {
-    throw new Error("Invalid JSON pointer for set.")
+    throw new Error('Invalid JSON pointer for set.')
   }
-  return traverse(obj, pointer, value);
+  return traverse(obj, pointer, value)
 }
 
 exports.get = get
