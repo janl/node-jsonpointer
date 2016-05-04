@@ -24,6 +24,9 @@
     "node": ">=0.10.0"
   },
   "main": "./jsonpointer",
+  "files": [
+    "jsonpointer.js"
+  ],
   "scripts": {
     "test": "standard && node test.js"
   },
