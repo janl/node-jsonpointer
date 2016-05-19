@@ -40,9 +40,24 @@ assert.equal(jsonpointer.get(obj, '/d/e/0/a'), 4)
 assert.equal(jsonpointer.get(obj, '/d/e/1/b'), 5)
 assert.equal(jsonpointer.get(obj, '/d/e/2/c'), 6)
 
+// can set `null` as a value
+assert.equal(jsonpointer.set(obj, '/f/g/h/foo/0', null), 'test')
+assert.strictEqual(jsonpointer.get(obj, '/f/g/h/foo/0'), null)
+assert.equal(jsonpointer.set(obj, '/b/c', null), 3)
+assert.strictEqual(jsonpointer.get(obj, '/b/c'), null)
+
 assert.equal(jsonpointer.get(obj, ''), obj)
 assert.throws(function () { jsonpointer.get(obj, 'a') }, validateError)
 assert.throws(function () { jsonpointer.get(obj, 'a/') }, validateError)
+
+// can unset values with `undefined`
+jsonpointer.set(obj, '/a', undefined)
+assert.strictEqual(jsonpointer.get(obj, '/a'), undefined)
+jsonpointer.set(obj, '/d/e/1', undefined)
+assert.strictEqual(jsonpointer.get(obj, '/d/e/1'), undefined)
+
+// returns `undefined` when path extends beyond any existing objects
+assert.strictEqual(jsonpointer.get(obj, '/x/y/z'), undefined)
 
 function validateError (err) {
   if ((err instanceof Error) && /Invalid JSON pointer/.test(err.message)) {
