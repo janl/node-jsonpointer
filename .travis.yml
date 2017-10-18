@@ -3,7 +3,6 @@ node_js:
   # keep latest first, so gk-lockfile can work its magic
   # https://github.com/greenkeeperio/greenkeeper-lockfile#testing-multiple-node-versions
   - 8.0
-  - 4.0
   - 6.0
   - node
 before_install:
