@@ -4,6 +4,10 @@
 
 This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08).
 
+## CLI
+
+Looking to filter JSON from the command line? Check out [jsonpointer-cli](https://github.com/joeyespo/jsonpointer-cli).
+
 ## Usage
 ```javascript
 var jsonpointer = require('jsonpointer');
