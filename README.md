@@ -1,5 +1,7 @@
 # JSON Pointer for nodejs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/janl/node-jsonpointer.svg)](https://greenkeeper.io/)
+
 This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08).
 
 ## Usage
