@@ -127,5 +127,6 @@ assert.equal(pointer.get(a), 'bar')
 assert.equal(pointer.set(a, 'test'), 'bar')
 assert.equal(pointer.get(a), 'test')
 assert.deepEqual(a, {foo: 'test'})
+assert.equal(pointer.toString(), '/foo')
 
 console.log('All tests pass.')
