@@ -77,7 +77,7 @@ function set (obj, pointer, value) {
 }
 
 function compile (pointer) {
-  var source = pointer.toString()
+  var source = pointer
   var compiled = compilePointer(pointer)
   return {
     get: function (object) {
