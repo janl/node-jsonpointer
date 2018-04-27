@@ -2,12 +2,13 @@ language: "node_js"
 node_js:
   # keep latest first, so gk-lockfile can work its magic
   # https://github.com/greenkeeperio/greenkeeper-lockfile#testing-multiple-node-versions
+  - 10.0
   - 8.0
   - 6.0
   - node
 before_install:
 # package-lock.json was introduced in npm@5
-- npm install -g npm@5
+- '[[ $(node -v) =~ ^v(9|10).*$ ]] || npm install -g npm@latest' # skipped when using node 9 or 10
 - npm install -g greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
