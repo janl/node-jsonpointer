@@ -35,7 +35,7 @@
   "license": "MIT",
   "devDependencies": {
     "greenkeeper-lockfile": "^1.9.0",
-    "semantic-release": "^8.2.0",
+    "semantic-release": "^15.9.12",
     "standard": "^11.0.0"
   }
 }
