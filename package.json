@@ -26,7 +26,8 @@
   "main": "./jsonpointer",
   "typings": "jsonpointer.d.ts",
   "files": [
-    "jsonpointer.js"
+    "jsonpointer.js",
+    "jsonpointer.d.ts"
   ],
   "scripts": {
     "test": "standard && node test.js",
