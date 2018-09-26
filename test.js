@@ -18,9 +18,10 @@ assert.strictEqual(jsonpointer.get(obj, '/d/e/0/a'), 3)
 assert.strictEqual(jsonpointer.get(obj, '/d/e/1/b'), 4)
 assert.strictEqual(jsonpointer.get(obj, '/d/e/2/c'), 5)
 
-// `null` and `undefined` cases
+// `null` and `undefined` cases when key is not what expected
 assert.strictEqual(jsonpointer.get(obj, '/k/l/m'), null)
 assert.strictEqual(jsonpointer.get(obj, '/m/l/k'), undefined)
+assert.strictEqual(jsonpointer.get(obj, '/a/b/c'), undefined)
 
 // set returns old value
 assert.strictEqual(jsonpointer.set(obj, '/a', 2), 1)
