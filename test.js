@@ -8,7 +8,8 @@ var obj = {
   },
   d: {
     e: [{ a: 3 }, { b: 4 }, { c: 5 }]
-  }
+  },
+  k: null
 }
 
 assert.equal(jsonpointer.get(obj, '/a'), 1)
@@ -16,6 +17,7 @@ assert.equal(jsonpointer.get(obj, '/b/c'), 2)
 assert.equal(jsonpointer.get(obj, '/d/e/0/a'), 3)
 assert.equal(jsonpointer.get(obj, '/d/e/1/b'), 4)
 assert.equal(jsonpointer.get(obj, '/d/e/2/c'), 5)
+assert.equal(jsonpointer.get(obj, '/k/l/m'), undefined)
 
 // set returns old value
 assert.equal(jsonpointer.set(obj, '/a', 2), 1)
