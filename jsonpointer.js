@@ -68,7 +68,7 @@ function get (obj, pointer) {
     if (obj === null) return obj
     obj = obj[item]
     if (len === p) return obj
-    if (obj === undefined || typeof obj !== 'object') return undefined
+    if (typeof obj !== 'object') return undefined
   }
 }
 
