@@ -63,7 +63,7 @@ function get (obj, pointer) {
   if (len === 1) return obj
 
   for (var p = 1; p < len;) {
-    var item = untilde(pointer[p++]);
+    var item = untilde(pointer[p++])
     if (item === undefined) return undefined
     if (obj === null) return obj
     obj = obj[item]

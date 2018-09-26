@@ -30,7 +30,7 @@ pointer.set(obj, 1) // sets obj.foo = 1
 
 ## Testing
 
-    $ node test.js
+    $ npm test
     All tests pass.
     $
 
