@@ -17,6 +17,9 @@ function setter (obj, pointer, value) {
   var part
   var hasNextPart
 
+  if (pointer[1] === 'constructor' && pointer[2] === 'prototype') return obj
+  if (pointer[1] === '__proto__') return obj
+
   for (var p = 1, len = pointer.length; p < len;) {
     part = untilde(pointer[p++])
     hasNextPart = len > p
