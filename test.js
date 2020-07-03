@@ -84,7 +84,7 @@ assert.equal(jsonpointer.get(complexKeys, '/a/b/c'), null)
 assert.equal(jsonpointer.get(complexKeys, '/~1'), null)
 
 // draft-ietf-appsawg-json-pointer-08 has special array rules
-var ary = [ 'zero', 'one', 'two' ]
+var ary = ['zero', 'one', 'two']
 assert.equal(jsonpointer.get(ary, '/01'), null)
 
 assert.equal(jsonpointer.set(ary, '/-', 'three'), null)
@@ -92,7 +92,7 @@ assert.equal(ary[3], 'three')
 
 // Examples from the draft:
 var example = {
-  'foo': ['bar', 'baz'],
+  foo: ['bar', 'baz'],
   '': 0,
   'a/b': 1,
   'c%d': 2,
@@ -121,12 +121,12 @@ assert.equal(jsonpointer.get(example, '/ '), 7)
 assert.equal(jsonpointer.get(example, '/m~0n'), 8)
 
 // jsonpointer.compile(path)
-var a = {foo: 'bar'}
+var a = { foo: 'bar' }
 var pointer = jsonpointer.compile('/foo')
 assert.equal(pointer.get(a), 'bar')
 assert.equal(pointer.set(a, 'test'), 'bar')
 assert.equal(pointer.get(a), 'test')
-assert.deepEqual(a, {foo: 'test'})
+assert.deepEqual(a, { foo: 'test' })
 
 var b = {}
 jsonpointer.set({}, '/constructor/prototype/boo', 'polluted')
