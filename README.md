@@ -38,6 +38,8 @@ pointer.set(obj, 1) // sets obj.foo = 1
 
 (c) 2011-2020 Jan Lehnardt <jan@apache.org> & Marc Bachmann <https://github.com/marcbachmann>
 
+Thanks to all contributors.
+
 ## License
 
 MIT License.
