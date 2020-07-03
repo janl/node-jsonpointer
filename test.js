@@ -128,4 +128,12 @@ assert.equal(pointer.set(a, 'test'), 'bar')
 assert.equal(pointer.get(a), 'test')
 assert.deepEqual(a, {foo: 'test'})
 
+var b = {}
+jsonpointer.set({}, '/constructor/prototype/boo', 'polluted')
+assert(!b.boo, 'should not boo')
+
+var c = {}
+jsonpointer.set({}, '/__proto__/boo', 'polluted')
+assert(!c.boo, 'should not boo')
+
 console.log('All tests pass.')
