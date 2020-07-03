@@ -1,8 +1,6 @@
-# JSON Pointer for nodejs
+# JSON Pointer for Node.js
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/janl/node-jsonpointer.svg)](https://greenkeeper.io/)
-
-This is an implementation of [JSON Pointer](http://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08).
+This is an implementation of [JSON Pointer](https://tools.ietf.org/html/rfc6901).
 
 ## CLI
 
@@ -38,7 +36,7 @@ pointer.set(obj, 1) // sets obj.foo = 1
 
 ## Author
 
-(c) 2011-2015 Jan Lehnardt <jan@apache.org> & Marc Bachmann <https://github.com/marcbachmann>
+(c) 2011-2020 Jan Lehnardt <jan@apache.org> & Marc Bachmann <https://github.com/marcbachmann>
 
 ## License
 
