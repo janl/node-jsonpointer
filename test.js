@@ -8,14 +8,12 @@ var obj = {
   },
   d: {
     e: [{ a: 3 }, { b: 4 }, { c: 5 }]
-  }
+  },
+  nullValue: null
 }
 
-assert.strictEqual(jsonpointer.get(obj, '/a'), 1)
-assert.strictEqual(jsonpointer.get(obj, '/b/c'), 2)
-assert.strictEqual(jsonpointer.get(obj, '/d/e/0/a'), 3)
-assert.strictEqual(jsonpointer.get(obj, '/d/e/1/b'), 4)
-assert.strictEqual(jsonpointer.get(obj, '/d/e/2/c'), 5)
+assert.equal(jsonpointer.get(obj, '/nullValue'), null)
+assert.equal(jsonpointer.get(obj, '/nullValue/e'), null)
 
 // set returns old value
 assert.strictEqual(jsonpointer.set(obj, '/a', 2), 1)
@@ -127,6 +125,12 @@ assert.strictEqual(pointer.get(a), 'bar')
 assert.strictEqual(pointer.set(a, 'test'), 'bar')
 assert.strictEqual(pointer.get(a), 'test')
 assert.deepEqual(a, { foo: 'test' })
+
+
+// compile read null value
+var compileWithNullValue = { foo: 'bar' }
+var pointerNullValue = jsonpointer.compile('/foo2/baz')
+assert.equal(pointer.get(pointerNullValue), null)
 
 var b = {}
 jsonpointer.set({}, '/constructor/prototype/boo', 'polluted')

@@ -73,6 +73,7 @@ function get (obj, pointer) {
     obj = obj[untilde(pointer[p++])]
     if (len === p) return obj
     if (typeof obj !== 'object') return undefined
+    if (obj === null) return null
   }
 }
 
