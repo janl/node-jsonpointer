@@ -136,4 +136,49 @@ var c = {}
 jsonpointer.set({}, '/__proto__/boo', 'polluted')
 assert(!c.boo, 'should not boo')
 
+var d = {}
+jsonpointer.set({}, '/foo/__proto__/boo', 'polluted')
+assert(!d.boo, 'should not boo')
+
+jsonpointer.set({}, '/foo/__proto__/__proto__/boo', 'polluted')
+assert(!d.boo, 'should not boo')
+
+var e = {}
+jsonpointer.set({}, '/constructor/prototype/boo', 'polluted')
+assert(!e.boo, 'should not boo')
+
+jsonpointer.set({}, '/foo/constructor/prototype/boo', 'polluted')
+assert(!e.boo, 'should not boo')
+
+jsonpointer.set({}, '/foo/constructor/constructor/prototype/boo', 'polluted')
+assert(!e.boo, 'should not boo')
+
+var f = {}
+jsonpointer.set({}, [['__proto__'], 'boo'], 'polluted')
+assert(!f.boo, 'should not f.boo')
+
+jsonpointer.set({}, [[['__proto__']], 'boo'], 'polluted')
+assert(!f.boo, 'should not f.boo')
+
+jsonpointer.set({}, [['__proto__'], ['__proto__'], 'boo'], 'polluted')
+assert(!f.boo, 'should not f.boo')
+
+jsonpointer.set({}, [[['__proto__']], [['__proto__']], 'boo'], 'polluted')
+assert(!f.boo, 'should not f.boo')
+
+jsonpointer.set({}, [['__proto__'], ['__proto__'], ['__proto__'], 'boo'], 'polluted')
+assert(!f.boo, 'should not f.boo')
+
+jsonpointer.set({}, [['foo'], ['__proto__'], 'boo'], 'polluted')
+assert(!f.boo, 'should not boo')
+
+jsonpointer.set({}, [['foo'], ['__proto__'], ['__proto__'], 'boo'], 'polluted')
+assert(!f.boo, 'should not boo')
+
+jsonpointer.set({}, [['constructor'], ['prototype'], 'boo'], 'polluted')
+assert(!f.boo, 'should not boo')
+
+jsonpointer.set({}, [['constructor'], ['constructor'], ['prototype'], 'boo'], 'polluted')
+assert(!f.boo, 'should not boo')
+
 console.log('All tests pass.')
