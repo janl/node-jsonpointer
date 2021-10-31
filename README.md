@@ -32,7 +32,7 @@ pointer.set(obj, 1) // sets obj.foo = 1
     All tests pass.
     $
 
-[![Build Status](https://travis-ci.org/janl/node-jsonpointer.png?branch=master)](https://travis-ci.org/janl/node-jsonpointer)
+[![Node.js CI](https://github.com/janl/node-jsonpointer/actions/workflows/node.js.yml/badge.svg)](https://github.com/janl/node-jsonpointer/actions/workflows/node.js.yml)
 
 ## Author
 
