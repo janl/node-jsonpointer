@@ -36,7 +36,7 @@ pointer.set(obj, 1) // sets obj.foo = 1
 
 ## Author
 
-(c) 2011-2020 Jan Lehnardt <jan@apache.org> & Marc Bachmann <https://github.com/marcbachmann>
+(c) 2011-2021 Jan Lehnardt <jan@apache.org> & Marc Bachmann <https://github.com/marcbachmann>
 
 Thanks to all contributors.
 
