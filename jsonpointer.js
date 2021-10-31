@@ -52,11 +52,11 @@ function compilePointer (pointer) {
     if (pointer[0] === '') return pointer
     throw new Error('Invalid JSON pointer.')
   } else if (Array.isArray(pointer)) {
-    pointer.forEach(function (part, i) {
+    for (const part of pointer) {
       if (typeof part !== 'string' && typeof part !== 'number') {
-        pointer[i] = '' + part
+        throw new Error('Invalid JSON pointer.')
       }
-    })
+    }
     return pointer
   }
 
