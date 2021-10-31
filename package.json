@@ -37,8 +37,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "semantic-release": "^17.1.1",
-    "standard": "^14.3.4"
+    "semantic-release": "^18.0.0",
+    "standard": "^16.0.4"
   },
   "standard": {
     "ignore": [
