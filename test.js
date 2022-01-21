@@ -12,8 +12,8 @@ var obj = {
   nullValue: null
 }
 
-assert.equal(jsonpointer.get(obj, '/nullValue'), null)
-assert.equal(jsonpointer.get(obj, '/nullValue/e'), null)
+assert.strictEqual(jsonpointer.get(obj, '/nullValue'), null)
+assert.strictEqual(jsonpointer.get(obj, '/nullValue/e'), undefined)
 
 // set returns old value
 assert.strictEqual(jsonpointer.set(obj, '/a', 2), 1)
@@ -119,18 +119,16 @@ assert.strictEqual(jsonpointer.get(example, '/ '), 7)
 assert.strictEqual(jsonpointer.get(example, '/m~0n'), 8)
 
 // jsonpointer.compile(path)
-var a = { foo: 'bar' }
+var a = { foo: 'bar', foo2: null }
 var pointer = jsonpointer.compile('/foo')
 assert.strictEqual(pointer.get(a), 'bar')
 assert.strictEqual(pointer.set(a, 'test'), 'bar')
 assert.strictEqual(pointer.get(a), 'test')
-assert.deepEqual(a, { foo: 'test' })
+assert.deepEqual(a, { foo: 'test', foo2: null })
 
-
-// compile read null value
-var compileWithNullValue = { foo: 'bar' }
+// Read subproperty of null value
 var pointerNullValue = jsonpointer.compile('/foo2/baz')
-assert.equal(pointer.get(pointerNullValue), null)
+assert.strictEqual(pointerNullValue.get(a), undefined)
 
 var b = {}
 jsonpointer.set({}, '/constructor/prototype/boo', 'polluted')

@@ -72,8 +72,7 @@ function get (obj, pointer) {
   for (var p = 1; p < len;) {
     obj = obj[untilde(pointer[p++])]
     if (len === p) return obj
-    if (typeof obj !== 'object') return undefined
-    if (obj === null) return null
+    if (typeof obj !== 'object' || obj === null) return undefined
   }
 }
 
