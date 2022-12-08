@@ -52,7 +52,7 @@ function compilePointer (pointer) {
     if (pointer[0] === '') return pointer
     throw new Error('Invalid JSON pointer.')
   } else if (Array.isArray(pointer)) {
-    for (const part of pointer) {
+    for (var part of pointer) {
       if (typeof part !== 'string' && typeof part !== 'number') {
         throw new Error('Invalid JSON pointer. Must be of type string or number.')
       }
