@@ -23,8 +23,8 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "main": "./jsonpointer",
-  "typings": "jsonpointer.d.ts",
+  "main": "./jsonpointer.js",
+  "typings": "./jsonpointer.d.ts",
   "files": [
     "jsonpointer.js",
     "jsonpointer.d.ts"
