@@ -162,4 +162,15 @@ assert.throws(function () { jsonpointer.set({}, [['foo'], ['__proto__'], ['__pro
 assert.throws(function () { jsonpointer.set({}, [['constructor'], ['prototype'], 'boo'], 'polluted')}, validateError)
 assert.throws(function () { jsonpointer.set({}, [['constructor'], ['constructor'], ['prototype'], 'boo'], 'polluted')}, validateError)
 
+assert.doesNotThrow(function() {
+    jsonpointer.set({}, '/toString/call', 'notafunction');
+    Object.prototype.toString.call({});
+  })
+
+jsonpointer.set({}, '/hasOwnProperty/someSpecialProperty', 'maliciousValue');
+var CONFIG = {'hardcodedKey': {'someSpecialProperty': 'value'}};
+var userSuppliedKey = 'hasOwnProperty';
+assert.notEqual(CONFIG[userSuppliedKey].someSpecialProperty, 'maliciousValue');
+
+
 console.log('All tests pass.')

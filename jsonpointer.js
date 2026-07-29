@@ -23,7 +23,7 @@ function setter (obj, pointer, value) {
     part = untilde(pointer[p++])
     hasNextPart = len > p
 
-    if (typeof obj[part] === 'undefined') {
+    if (typeof obj[part] === 'undefined' || !Object.prototype.hasOwnProperty.call(obj, part)) {
       // support setting of /-
       if (Array.isArray(obj) && part === '-') {
         part = obj.length
