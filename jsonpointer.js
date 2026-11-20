@@ -1,5 +1,6 @@
 var hasExcape = /~/
 var escapeMatcher = /~[01]/g
+var arrayIndex = /^(?:0|[1-9][0-9]*|-)$/
 function escapeReplacer (m) {
   switch (m) {
     case '~1': return '/'
@@ -31,7 +32,7 @@ function setter (obj, pointer, value) {
 
       // support nested objects/array when setting values
       if (hasNextPart) {
-        if ((pointer[p] !== '' && pointer[p] < Infinity) || pointer[p] === '-') obj[part] = []
+        if (arrayIndex.test(pointer[p])) obj[part] = []
         else obj[part] = {}
       }
     }
