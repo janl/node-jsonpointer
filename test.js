@@ -32,6 +32,19 @@ var arr = jsonpointer.get(obj, '/f/g/h/foo')
 assert(Array.isArray(arr), 'set /- creates an array.')
 assert.strictEqual(arr[0], 'test')
 
+// only array index tokens (RFC 6901: digits without leading zeros) create an array
+;['-1', '1.5', '0x1f', ' 1', '1e3', '01', ' '].forEach(function (token) {
+  var o = {}
+  jsonpointer.set(o, '/a/' + token + '/b', 1)
+  assert(!Array.isArray(o.a), 'set /a/' + token + '/b creates an object')
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(o)), { a: { [token]: { b: 1 } } })
+})
+;['0', '2', '-'].forEach(function (token) {
+  var o = {}
+  jsonpointer.set(o, '/a/' + token + '/b', 1)
+  assert(Array.isArray(o.a), 'set /a/' + token + '/b creates an array')
+})
+
 assert.strictEqual(jsonpointer.get(obj, '/a'), 2)
 assert.strictEqual(jsonpointer.get(obj, '/b/c'), 3)
 assert.strictEqual(jsonpointer.get(obj, '/d/e/0/a'), 4)
